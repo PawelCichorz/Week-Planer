@@ -67,7 +67,7 @@ res.json(newNote)
  
   
 res.json(newNote)
-        
+        console.log('a')
     },
 
     async getAllnotesT(req,res) {
