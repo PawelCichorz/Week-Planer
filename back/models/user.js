@@ -30,7 +30,6 @@ const userSchema = new Schema({
 userSchema.methods = {
     comparePassword(password){
         const user = this
-        
         return password === this.password;
     }
 }
