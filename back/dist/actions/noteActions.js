@@ -19,15 +19,12 @@ const noteTh_1 = __importDefault(require("../models/noteTh"));
 const noteF_1 = __importDefault(require("../models/noteF"));
 const noteS_1 = __importDefault(require("../models/noteS"));
 const noteSu_1 = __importDefault(require("../models/noteSu"));
-const mongoose_1 = __importDefault(require("mongoose"));
 const noteActions = {
     // Poniedziałek
     saveNoteM(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(req.session.email);
             const { title, body } = req.body;
-            const email = req.session.email;
-            const userId = `${email}12345`;
+            const userId = req.session.userId;
             const newNote = new noteM_1.default({
                 title,
                 body,
@@ -39,8 +36,7 @@ const noteActions = {
     },
     getAllnotesM(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const email = req.session.email;
-            const userId = `${email}12345`;
+            const userId = req.session.userId;
             const doc = yield noteM_1.default.find({ userId });
             res.json(doc);
         });
@@ -80,7 +76,7 @@ const noteActions = {
     saveNoteT(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { title, body } = req.body;
-            const userId = new mongoose_1.default.Types.ObjectId(req.session.user);
+            const userId = req.session.userId;
             const newNote = new noteT_1.default({
                 title,
                 body,
@@ -92,7 +88,7 @@ const noteActions = {
     },
     getAllnotesT(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userId = new mongoose_1.default.Types.ObjectId(req.session.user);
+            const userId = req.session.userId;
             const doc = yield noteT_1.default.find({ userId });
             res.json(doc);
         });
@@ -132,7 +128,7 @@ const noteActions = {
     saveNoteW(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { title, body } = req.body;
-            const userId = new mongoose_1.default.Types.ObjectId(req.session.user);
+            const userId = req.session.userId;
             const newNote = new noteW_1.default({
                 title,
                 body,
@@ -144,7 +140,7 @@ const noteActions = {
     },
     getAllnotesW(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userId = new mongoose_1.default.Types.ObjectId(req.session.user);
+            const userId = req.session.userId;
             const doc = yield noteW_1.default.find({ userId });
             res.json(doc);
         });
@@ -183,7 +179,7 @@ const noteActions = {
     // Czwartek
     saveNoteTh(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userId = new mongoose_1.default.Types.ObjectId(req.session.user);
+            const userId = req.session.userId;
             const { title, body } = req.body;
             const newNote = new noteTh_1.default({
                 title,
@@ -196,7 +192,7 @@ const noteActions = {
     },
     getAllnotesTh(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userId = new mongoose_1.default.Types.ObjectId(req.session.user);
+            const userId = req.session.userId;
             const doc = yield noteTh_1.default.find({ userId });
             res.json(doc);
         });
@@ -235,7 +231,7 @@ const noteActions = {
     // Piątek
     saveNoteF(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userId = new mongoose_1.default.Types.ObjectId(req.session.user);
+            const userId = req.session.userId;
             const { title, body } = req.body;
             const newNote = new noteF_1.default({
                 title,
@@ -248,7 +244,7 @@ const noteActions = {
     },
     getAllnotesF(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userId = new mongoose_1.default.Types.ObjectId(req.session.user);
+            const userId = req.session.userId;
             const doc = yield noteF_1.default.find({ userId });
             res.json(doc);
         });
@@ -287,7 +283,7 @@ const noteActions = {
     // Sobota
     saveNoteS(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userId = new mongoose_1.default.Types.ObjectId(req.session.user);
+            const userId = req.session.userId;
             const { title, body } = req.body;
             const newNote = new noteS_1.default({
                 title,
@@ -300,7 +296,7 @@ const noteActions = {
     },
     getAllnotesS(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userId = new mongoose_1.default.Types.ObjectId(req.session.user);
+            const userId = req.session.userId;
             const doc = yield noteS_1.default.find({ userId });
             res.json(doc);
         });
@@ -339,7 +335,7 @@ const noteActions = {
     // Niedziela
     saveNoteSu(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userId = new mongoose_1.default.Types.ObjectId(req.session.user);
+            const userId = req.session.userId;
             const { title, body } = req.body;
             const newNote = new noteSu_1.default({
                 title,
@@ -352,7 +348,7 @@ const noteActions = {
     },
     getAllnotesSu(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userId = new mongoose_1.default.Types.ObjectId(req.session.user);
+            const userId = req.session.userId;
             const doc = yield noteSu_1.default.find({ userId });
             res.json(doc);
         });

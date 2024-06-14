@@ -35,12 +35,12 @@ export async function login(req: Request, res: Response) {
             console.log('Nieprawidłowe hasło');
             return res.status(401).json({ error: 'Nieprawidłowe hasło' });
         }
-
-        req.session.email = user.email
+        
+        req.session.userId = user._id
         await req.session.save();
     
-        console.log('Zalogowano pomyślniea:', req.body.email);
-        res.json({ message: 'Zalogowano pomyślnie', email: user.email  });
+        console.log('Zalogowano pomyślniea:', req.session.id);
+        res.json({ message: 'Zalogowano pomyślnie', email: user._id });
     } catch (error) {
         console.error('Błąd podczas logowania:', error);
         res.status(500).json({ error: 'Wystąpił błąd podczas logowania' });

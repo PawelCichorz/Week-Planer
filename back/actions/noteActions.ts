@@ -18,11 +18,11 @@ interface NoteRequest extends Request {
 const noteActions = {
     // Poniedziałek
     async saveNoteM(req: NoteRequest, res: Response) {
-     console.log(req.session.email)
+  
 
         const { title, body } = req.body;
-        const email = req.session.email
-        const userId = `${email}12345`;
+        const userId = req.session.userId
+     
         const newNote = new NoteM({
             title,
             body,
@@ -34,8 +34,7 @@ const noteActions = {
     },
 
     async getAllnotesM(req: NoteRequest, res: Response) {
-        const email = req.session.email
-        const userId = `${email}12345`;
+        const userId = req.session.userId
         const doc = await NoteM.find({ userId });
         res.json(doc);
     },
@@ -72,7 +71,7 @@ const noteActions = {
     async saveNoteT(req: NoteRequest, res: Response) {
     
         const { title, body } = req.body;
-        const userId = new mongoose.Types.ObjectId(req.session.user);
+        const userId = req.session.userId
         const newNote = new NoteT({
             title,
             body,
@@ -83,7 +82,7 @@ const noteActions = {
     },
     async getAllnotesT(req: NoteRequest, res: Response) {
       
-        const userId = new mongoose.Types.ObjectId(req.session.user);
+        const userId = req.session.userId
         const doc = await NoteT.find({userId});
         res.json(doc);
     },
@@ -120,7 +119,7 @@ const noteActions = {
     async saveNoteW(req: NoteRequest, res: Response) {
        
         const { title, body } = req.body;
-        const userId = new mongoose.Types.ObjectId(req.session.user);
+        const userId = req.session.userId
         const newNote = new NoteW({
             title,
             body,
@@ -131,7 +130,7 @@ const noteActions = {
     },
     async getAllnotesW(req: NoteRequest, res: Response) {
      
-        const userId = new mongoose.Types.ObjectId(req.session.user);
+        const userId = req.session.userId
         const doc = await NoteW.find({userId});
         res.json(doc);
     },
@@ -168,7 +167,7 @@ const noteActions = {
     // Czwartek
     async saveNoteTh(req: NoteRequest, res: Response) {
         
-        const userId = new mongoose.Types.ObjectId(req.session.user);
+        const userId = req.session.userId
         const { title, body } = req.body;
         const newNote = new NoteTh({
             title,
@@ -180,7 +179,7 @@ const noteActions = {
     },
     async getAllnotesTh(req: NoteRequest, res: Response) {
        
-        const userId = new mongoose.Types.ObjectId(req.session.user);
+        const userId = req.session.userId
         const doc = await NoteTh.find({userId});
         res.json(doc);
     },
@@ -216,7 +215,7 @@ const noteActions = {
     // Piątek
     async saveNoteF(req: NoteRequest, res: Response) {
        
-        const userId = new mongoose.Types.ObjectId(req.session.user);
+        const userId = req.session.userId
         const { title, body } = req.body;
         const newNote = new NoteF({
             title,
@@ -227,8 +226,7 @@ const noteActions = {
         res.json(newNote);
     },
     async getAllnotesF(req: NoteRequest, res: Response) {
-       
-        const userId = new mongoose.Types.ObjectId(req.session.user);
+        const userId = req.session.userId
         const doc = await NoteF.find({userId});
         res.json(doc);
     },
@@ -264,7 +262,7 @@ const noteActions = {
     // Sobota
     async saveNoteS(req: NoteRequest, res: Response) {
      
-        const userId = new mongoose.Types.ObjectId(req.session.user);
+        const userId = req.session.userId
         const { title, body } = req.body;
         const newNote = new NoteS({
             title,
@@ -276,7 +274,7 @@ const noteActions = {
     },
     async getAllnotesS(req: NoteRequest, res: Response) {
      
-        const userId = new mongoose.Types.ObjectId(req.session.user);
+        const userId = req.session.userId
         const doc = await NoteS.find({userId});
         res.json(doc);
     },
@@ -312,7 +310,7 @@ const noteActions = {
     // Niedziela
     async saveNoteSu(req: NoteRequest, res: Response) {
         
-        const userId = new mongoose.Types.ObjectId(req.session.user);
+        const userId = req.session.userId
         const { title, body } = req.body;
         const newNote = new NoteSu({
             title,
@@ -324,7 +322,7 @@ const noteActions = {
     },
     async getAllnotesSu(req: NoteRequest, res: Response) {
      
-        const userId = new mongoose.Types.ObjectId(req.session.user);
+        const userId = req.session.userId
         const doc = await NoteSu.find({userId});
         res.json(doc);
     },

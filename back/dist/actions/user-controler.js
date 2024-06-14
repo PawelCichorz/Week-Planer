@@ -40,10 +40,10 @@ function login(req, res) {
                 console.log('Nieprawidłowe hasło');
                 return res.status(401).json({ error: 'Nieprawidłowe hasło' });
             }
-            req.session.email = user.email;
+            req.session.userId = user._id;
             yield req.session.save();
-            console.log('Zalogowano pomyślniea:', req.body.email);
-            res.json({ message: 'Zalogowano pomyślnie', email: user.email });
+            console.log('Zalogowano pomyślniea:', req.session.id);
+            res.json({ message: 'Zalogowano pomyślnie', email: user._id });
         }
         catch (error) {
             console.error('Błąd podczas logowania:', error);

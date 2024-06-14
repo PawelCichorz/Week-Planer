@@ -27,7 +27,7 @@ const mongoose_1 = __importStar(require("mongoose"));
 const NoteNSchema = new mongoose_1.Schema({
     title: { type: String, required: true },
     body: { type: String, required: true },
-    userId: { type: mongoose_1.default.Types.ObjectId, ref: 'User', required: true }
+    userId: { type: mongoose_1.Schema.Types.ObjectId, ref: 'User', required: true }
 });
 const NoteNModel = mongoose_1.default.model('NoteSu', NoteNSchema);
 exports.default = NoteNModel;
