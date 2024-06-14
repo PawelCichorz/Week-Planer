@@ -29,19 +29,25 @@ function register(req, res) {
 exports.register = register;
 function login(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const user = yield user_1.default.findOne({ email: req.body.email });
-        if (!user) {
-            throw new Error('Nie ma takiego emaila');
+        try {
+            const user = yield user_1.default.findOne({ email: req.body.email });
+            if (!user) {
+                console.log('Nie ma takiego użytkownika');
+                return res.status(401).json({ error: 'Nie ma takiego emaila' });
+            }
+            const isValidPassword = yield user.comparePassword(req.body.password);
+            if (!isValidPassword) {
+                console.log('Nieprawidłowe hasło');
+                return res.status(401).json({ error: 'Nieprawidłowe hasło' });
+            }
+            req.session.user = user._id;
+            console.log('Zalogowano pomyślnie:', req.session.user);
+            res.json({ message: 'Zalogowano pomyślnie', userId: req.session.user });
         }
-        const isValidPassword = yield user.comparePassword(req.body.password);
-        if (!isValidPassword) {
-            throw new Error('Nieprawidłowe hasło');
+        catch (error) {
+            console.error('Błąd podczas logowania:', error);
+            res.status(500).json({ error: 'Wystąpił błąd podczas logowania' });
         }
-        req.session.user = {
-            _id: user._id,
-            email: user.email
-        };
-        res.send('');
     });
 }
 exports.login = login;
