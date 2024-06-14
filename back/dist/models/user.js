@@ -30,7 +30,7 @@ const userSchema = new mongoose_1.Schema({
         required: true,
         lowercase: true,
         trim: true,
-        unique: true // Pole jest unikatowe
+        unique: true
     },
     password: {
         type: String,

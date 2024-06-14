@@ -1,6 +1,14 @@
 import { Request, Response } from 'express';
 import User from '../models/user';
 
+import { Session, SessionData } from 'express-session';
+
+declare module 'express-session' {
+    interface SessionData {
+      userId?: string;
+      email?: string;
+    }
+  }
 
 export async function register(req: Request, res: Response) {
     const email = req.body.email;
@@ -14,18 +22,27 @@ export async function register(req: Request, res: Response) {
 }
 
 export async function login(req: Request, res: Response) {
-    const user = await User.findOne({ email: req.body.email });
-    if (!user) {
-        throw new Error('Nie ma takiego emaila');
-    }
-    const isValidPassword = await user.comparePassword(req.body.password);
+    try {
+        const user:any = await User.findOne({ email: req.body.email });
 
-    if (!isValidPassword) {
-        throw new Error('Nieprawidłowe hasło');
-    }
+        if (!user) {
+            console.log('Nie ma takiego użytkownika');
+            return res.status(401).json({ error: 'Nie ma takiego emaila' });
+        }
 
-    req.session.user = {
-        _id: user._id,
-        email: user.email
-    };
-    res.send('')}
+        const isValidPassword = await user.comparePassword(req.body.password);
+        if (!isValidPassword) {
+            console.log('Nieprawidłowe hasło');
+            return res.status(401).json({ error: 'Nieprawidłowe hasło' });
+        }
+
+        req.session.email = user.email
+        await req.session.save();
+    
+        console.log('Zalogowano pomyślniea:', req.body.email);
+        res.json({ message: 'Zalogowano pomyślnie', email: user.email  });
+    } catch (error) {
+        console.error('Błąd podczas logowania:', error);
+        res.status(500).json({ error: 'Wystąpił błąd podczas logowania' });
+    }
+}

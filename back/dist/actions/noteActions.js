@@ -24,9 +24,9 @@ const noteActions = {
     // Poniedziałek
     saveNoteM(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(req.session.user);
+            console.log(req.session.email);
             const { title, body } = req.body;
-            const email = req.body.email;
+            const email = req.session.email;
             const userId = `${email}12345`;
             const newNote = new noteM_1.default({
                 title,
@@ -39,7 +39,8 @@ const noteActions = {
     },
     getAllnotesM(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userId = new mongoose_1.default.Types.ObjectId(req.session.user);
+            const email = req.session.email;
+            const userId = `${email}12345`;
             const doc = yield noteM_1.default.find({ userId });
             res.json(doc);
         });

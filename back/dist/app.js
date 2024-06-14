@@ -14,7 +14,7 @@ const app = (0, express_1.default)();
 app.use((0, express_session_1.default)({
     secret: 'klominkaa',
     saveUninitialized: true,
-    cookie: { maxAge: 3600000 },
+    cookie: { maxAge: 3600000, secure: false },
     resave: false
 }));
 app.use((0, cors_1.default)({
