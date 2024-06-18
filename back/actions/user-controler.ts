@@ -37,6 +37,7 @@ export async function login(req: Request, res: Response) {
         }
         
         req.session.userId = user._id
+       
         await req.session.save();
     
         console.log('Zalogowano pomyślniea:', req.session.id);
