@@ -4,9 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const config_1 = __importDefault(require("../config"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const databaseUrl = process.env.DATABASE;
 try {
-    mongoose_1.default.connect(config_1.default.database, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose_1.default.connect(databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true });
     console.log('Połączono z bazą danych');
 }
 catch (err) {

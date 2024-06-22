@@ -20,7 +20,7 @@ const noteActions = {
   
 
         const { title, body ,day} = req.body;
-        const userId = req.session.userId
+       const  userId = req.user!.userId;
      
         const newNote = new NoteM({
             title,
@@ -34,7 +34,7 @@ const noteActions = {
     },
 
     async getAllNotes(req: NoteRequest, res: Response) {
-        const userId = req.session.userId
+        const  userId = req.user!.userId;
         const { day } = req.query;
         const doc = await NoteM.find({ userId ,day});
         res.json(doc);

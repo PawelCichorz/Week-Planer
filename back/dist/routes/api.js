@@ -31,7 +31,7 @@ const router = express_1.default.Router();
 const noteActions_1 = __importDefault(require("../actions/noteActions"));
 const userController = __importStar(require("../actions/user-controler"));
 router.get('/', function hello(req, res) {
-    res.send("siema");
+    res.send("siema Paweł");
 });
 router.get('/notes', noteActions_1.default.getAllNotes);
 router.get('/notes/:id', noteActions_1.default.getNote);

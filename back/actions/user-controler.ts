@@ -1,14 +1,11 @@
 import { Request, Response } from 'express';
 import User from '../models/user';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-import { Session, SessionData } from 'express-session';
+dotenv.config();
 
-declare module 'express-session' {
-    interface SessionData {
-      userId?: string;
-      email?: string;
-    }
-  }
+
 
 export async function register(req: Request, res: Response) {
     const email = req.body.email;
@@ -36,12 +33,12 @@ export async function login(req: Request, res: Response) {
             return res.status(401).json({ error: 'Nieprawidłowe hasło' });
         }
         
-        req.session.userId = user._id
+        
        
-        await req.session.save();
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, { expiresIn: '15s' });
     
-        console.log('Zalogowano pomyślniea:', req.session.id);
-        res.json({ message: 'Zalogowano pomyślnie', email: user._id });
+        console.log('Zalogowano pomyślniea:');
+        res.json({ message: 'Zalogowano pomyślnie', userId: user._id,token });
     } catch (error) {
         console.error('Błąd podczas logowania:', error);
         res.status(500).json({ error: 'Wystąpił błąd podczas logowania' });

@@ -3,16 +3,18 @@ const router = express.Router();
 
 import noteActions from '../actions/noteActions';
 import * as userController from '../actions/user-controler';
-
+import {  verifyToken } from '../dist/middleware/auth';
 router.get('/', function hello(req, res) {
-    res.send("siema");
+    res.send("siema Paweł");
 });
 
-router.get('/notes', noteActions.getAllNotes);
-router.get('/notes/:id', noteActions.getNote);
-router.post('/notes', noteActions.saveNote);
-router.put('/notes/:id', noteActions.updateNote);
-router.delete('/notes/:id', noteActions.deleteNote);
+
+router.get('/notes', verifyToken,noteActions.getAllNotes);
+router.get('/notes/:id',verifyToken, noteActions.getNote);
+router.post('/notes', verifyToken,noteActions.saveNote);
+router.put('/notes/:id', verifyToken,noteActions.updateNote);
+router.delete('/notes/:id', verifyToken,noteActions.deleteNote);
+
 
 // // Poniedziałek
 // // Pobieranie notatek

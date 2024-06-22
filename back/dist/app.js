@@ -8,8 +8,10 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const express_session_1 = __importDefault(require("express-session"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
-const config_1 = __importDefault(require("./config"));
 require("./db/mongoose");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const port = process.env.PORT;
 const app = (0, express_1.default)();
 app.use((0, express_session_1.default)({
     secret: 'klominkaa',
@@ -24,9 +26,8 @@ app.use((0, cors_1.default)({
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)());
-// Import API router
 const api_1 = __importDefault(require("./routes/api"));
 app.use('/', api_1.default);
-app.listen(config_1.default.port, () => {
+app.listen(port, () => {
     console.log('Serwer Chodzi');
 });
