@@ -9,6 +9,7 @@ import NoteM from '../models/noteM';
 import { SessionData, Session } from 'express-session';
 
 
+
 interface NoteRequest extends Request {
     session: Session & Partial<SessionData> & { user?: string };
 }
@@ -18,15 +19,17 @@ const noteActions = {
     // Poniedziałek
     async saveNote(req: NoteRequest, res: Response) {
   
-
-        const { title, body ,day} = req.body;
-       const  userId = req.user!.userId;
-     
+   const  userId = req.user!.userId;
+        const { title, body ,day  } = req.body;
+      
+    console.log(req.body)
+  
         const newNote = new NoteM({
             title,
             body,
             userId,
-            day
+            day,
+            
         });
 
         await newNote.save();
@@ -34,8 +37,11 @@ const noteActions = {
     },
 
     async getAllNotes(req: NoteRequest, res: Response) {
+       
+   
         const  userId = req.user!.userId;
         const { day } = req.query;
+       
         const doc = await NoteM.find({ userId ,day});
         res.json(doc);
     },

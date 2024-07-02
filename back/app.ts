@@ -1,17 +1,30 @@
 
+import 'dotenv/config'
 import express from 'express';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-
-
 import './db/mongoose';
-import dotenv from 'dotenv'
+import fs from 'fs';
+import crypto from 'crypto';
 
 
-dotenv.config();
+
+
 const port = process.env.PORT 
+const envPath = '.env';
+const envContent = fs.readFileSync(envPath, 'utf8');
+if (!envContent.includes('PRIVATE_KEY')){
+const { privateKey } = crypto.generateKeyPairSync('rsa', {
+  modulusLength: 2048,
+  publicKeyEncoding: { type: 'pkcs1', format: 'pem' },
+  privateKeyEncoding: { type: 'pkcs1', format: 'pem' }
+});
+
+// Zapisz klucz prywatny do pliku .env
+fs.writeFileSync('.env', `PRIVATE_KEY=${privateKey}`);}
+
 
 
 const app = express();
