@@ -40,7 +40,7 @@ export async function refreshAccessToken(req: Request, res: Response) {
       return res.status(401).json({ error: 'Brak tokena odświeżania' });
   }
   try {
-    const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET!);
+    const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET!);
     const user = await User.findById((decoded as JwtPayload).userId);
 
     if (!user || user.refreshToken !== refreshToken) {

@@ -19,7 +19,7 @@ const noteActions = {
     // Poniedziałek
     async saveNote(req: NoteRequest, res: Response) {
   
-   const  userId = req.user!.userId;
+        const  userId = req.user!.userId;
         const { title, body ,day  } = req.body;
       
     console.log(req.body)
@@ -40,9 +40,9 @@ const noteActions = {
        
    
         const  userId = req.user!.userId;
-        const { day } = req.query;
+        
        
-        const doc = await NoteM.find({ userId ,day});
+        const doc = await NoteM.find({ userId });
         res.json(doc);
     },
 

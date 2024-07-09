@@ -46,7 +46,7 @@ export async function login(req: Request, res: Response) {
         }
         
         const accessToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, { expiresIn: '30m' });
-        const refreshToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, { expiresIn: '7d' });
+        const refreshToken = jwt.sign({ userId: user._id }, process.env.REFRESH_SECRET!, { expiresIn: '7d' });
      
         user.refreshToken = refreshToken;
         await user.save();
@@ -58,33 +58,6 @@ export async function login(req: Request, res: Response) {
     }
     
 }
-
-// export async function changePassword(req: Request, res: Response) {
-//     const userId = req.user!.userId;
-//     const { oldPassword, newPassword } = req.body;
-//   console.log(oldPassword,newPassword)
-//     try {
-//       const user = await User.findById(userId);
-//       if (!user) {
-//         return res.status(404).json({ error: 'Użytkownik nie znaleziony' });
-//       }
-  
-//       const isValidPassword = await bcrypt.compare(oldPassword, user.password);
-//       if (!isValidPassword) {
-//         return res.status(401).json({ error: 'Nieprawidłowe stare hasło' });
-//       }
-  
-//       user.password = newPassword
-//     //   const hashedNewPassword = await bcrypt.hash(newPassword, 10);;
-//       console.log(newPassword)
-//       await user.save();
-  
-//       res.json({ message: 'Hasło zmienione pomyślnie' });
-//     } catch (error) {
-//       console.error('Błąd podczas zmiany hasła:', error);
-//       res.status(500).json({ error: 'Wystąpił błąd podczas zmiany hasła' });
-//     }
-//   }
 
 
 export async function changePassword(req: Request, res: Response) {
