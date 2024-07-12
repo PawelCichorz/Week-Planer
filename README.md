@@ -10,6 +10,22 @@ The whole backend is based on well-configured RestApi.The project also includes 
 -Mongo DB
 -JWT
 ## How to run App 
+git clone https://github.com/PawelCichorz/Week-Planer.git
+cd Week-Planer
+
+cd frontend
+npm install
+
+cd backend
+npm install
+
+In the backend directory, create a .env file and add the following variables:
+PORT=5000  # Example port number, replace with your preferred port
+MONGO_URI=your_mongodb_uri  # Replace with your MongoDB connection URI
+JWT_SECRET=your_jwt_secret  # Replace with a secure JWT secret
+
+npm start
+npm run dev
 
 ## Funcionality
 - User registration and login with full JWT authentication
