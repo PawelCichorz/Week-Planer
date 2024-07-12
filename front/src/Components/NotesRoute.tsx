@@ -1,7 +1,8 @@
 import React, { useEffect, useReducer } from "react";
+
 import Notes from "./Notes";
-import { fetchNotesBackend } from "../backend";
 import reducer, { initialState } from "./reducerNotes";
+import { fetchNotesBackend } from "../backend";
 import EditingContext from "../context";
 
 // import { checkAccess } from "../backend";

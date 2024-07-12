@@ -1,8 +1,8 @@
-import { apiUrl, baseUrl } from "./BackendPaths";
-import { Note } from "./Components/type";
-import axios from "./Components/axiosAurotization";
-
 import { AxiosError } from "axios";
+
+import { apiUrl, baseUrl } from "./BackendPaths";
+import axios from "./Components/axiosAurotization";
+import { Note } from "./Components/type";
 
 axios.defaults.withCredentials = true;
 

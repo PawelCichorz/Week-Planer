@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { sendResetPasswordEmail } from "../backend";
+
 import * as S from "./ResetPaswordStyles";
+import { sendResetPasswordEmail } from "../backend";
 
 interface IFormInput {
   email: string;

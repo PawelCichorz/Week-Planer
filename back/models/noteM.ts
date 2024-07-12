@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-export interface INoteP extends Document {
+export interface NoteM extends Document {
     title: string;
     body: string;
     userId: mongoose.Types.ObjectId;
@@ -13,6 +13,6 @@ const NotePSchema: Schema = new Schema({
     day:{ type: String, required: true }}
 );
 
-const NotePModel = mongoose.model<INoteP>('Note', NotePSchema);
+const NoteM = mongoose.model<NoteM>('Note', NotePSchema);
 
-export default NotePModel;
+export default NoteM;

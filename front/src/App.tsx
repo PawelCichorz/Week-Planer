@@ -1,18 +1,17 @@
 import React from "react";
-
-import Register from "./Components/Register";
-import Main from "./Components/Main";
-import Login from "./Components/Login";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
-import * as S from "./AppStyles";
-import setupAxiosInterceptors from "./setupAxiosInterceptors";
-import ChangePassword from "./Components/ChangePassword";
-import ResetPassword from "./Components/ResetPasword";
+import { Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import NotesFetch from "./Components/NotesFetch";
+import * as S from "./AppStyles";
+import ChangePassword from "./Components/ChangePassword";
+import Login from "./Components/Login";
+import Main from "./Components/Main";
+import NotesRoute from "./Components/NotesRoute";
+import Register from "./Components/Register";
+import ResetPassword from "./Components/ResetPasword";
+import setupAxiosInterceptors from "./setupAxiosInterceptors";
 
 function App() {
   const [session, setSession] = useState(null);
@@ -48,7 +47,7 @@ function App() {
           path="/notes"
           element={
             <>
-              <NotesFetch />
+              <NotesRoute />
 
               <S.Div>
                 <Link to={"/change-password"}>Zmień Hasło</Link>

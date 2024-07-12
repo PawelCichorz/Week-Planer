@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import NoteForm from "./NoteForm";
 import NotesList from "./NotesList";
-// import EditingContext from "../context";
-// import reducer, { initialState } from "./reducerNotes";
 import * as S from "./NotesStyles";
 import { checkAccess } from "../backend";
-import { useNavigate } from "react-router-dom";
-// import { checkAccess } from "../backend";
 
 type NotesProps = {
   day: string;

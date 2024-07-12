@@ -1,9 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+
 import * as S from "./RegisterStyle";
-import { registerBackend } from "../backend";
 import { emailValidate, passwordValidate } from "./registerValidate";
+import { registerBackend } from "../backend";
 
 function Register() {
   const history = useNavigate();

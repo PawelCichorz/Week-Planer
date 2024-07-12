@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
 import React from "react";
-import { changePassword, changePasswordWithToken } from "../backend";
-import * as S from "./ChangePasswordStyles";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+
+import * as S from "./ChangePasswordStyles";
+import { changePassword, changePasswordWithToken } from "../backend";
 
 function ChangePassword() {
   const {

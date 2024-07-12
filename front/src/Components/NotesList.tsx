@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+
 import * as S from "./NotesListStyles";
 import { Note } from "./type";
 import { deleteNoteBackend } from "../backend";
@@ -57,7 +58,7 @@ function NotesList({ dayTitle, day, setModalOpen }: NotesListProps) {
     <S.Container>
       <S.DayofWeek>{dayTitle}</S.DayofWeek>
       {filteredNotes.map((notatka) => (
-        <S.OneFetchNotes key={notatka._id}>
+        <S.OneFetchNotes key={notatka._id} data-testid="note">
           <S.TimeandDesc>
             <S.Time>Godzina:</S.Time> <div>{notatka.title}</div>
           </S.TimeandDesc>
@@ -69,7 +70,10 @@ function NotesList({ dayTitle, day, setModalOpen }: NotesListProps) {
             <S.ButtonEdit onClick={() => openModalToEdit(notatka)}>
               Edytuj
             </S.ButtonEdit>
-            <S.ButtonDelete onClick={() => deleteNote(notatka._id)}>
+            <S.ButtonDelete
+              onClick={() => deleteNote(notatka._id)}
+              data-testid="delete-button"
+            >
               Usuń
             </S.ButtonDelete>
           </S.DivWithButton>

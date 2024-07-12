@@ -1,8 +1,9 @@
 import { useContext, useEffect, useRef } from "react";
 import React from "react";
-import EditingContext from "../context";
-import { addNoteBackend, editNoteBackend } from "../backend";
+
 import * as S from "./NoteFormStyles";
+import { addNoteBackend, editNoteBackend } from "../backend";
+import EditingContext from "../context";
 
 type NotesProps = {
   day: string;

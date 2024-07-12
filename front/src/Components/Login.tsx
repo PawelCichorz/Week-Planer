@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router-dom";
 import React from "react";
-import { useForm } from "react-hook-form";
-
-import { loginBackend } from "../backend";
-import * as S from "./LoginStyles";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
+import * as S from "./LoginStyles";
+import { loginBackend } from "../backend";
 
 type LoginProps = {
-  onLoginSuccess: (data: any, value: string) => void;
+  onLoginSuccess: (data: any) => void;
 };
 
 function Login({ onLoginSuccess }: LoginProps) {
@@ -39,8 +39,9 @@ function Login({ onLoginSuccess }: LoginProps) {
       const { accessToken, refreshToken } = response.data;
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("accessToken", accessToken);
+      console.log("onLoginSuccess is called with:", response.config.data);
 
-      onLoginSuccess(response.config.data, response.data.userId);
+      onLoginSuccess(response.config.data);
 
       history("/notes");
     } catch (error: any) {
@@ -72,7 +73,9 @@ function Login({ onLoginSuccess }: LoginProps) {
         {errors.password && <p>{errors.password.message as React.ReactNode}</p>}
       </S.PasswordDiv>
       {loginError && <p>{loginError}</p>}
-      <S.Button>ZALOGUJ</S.Button>
+      <S.Button data-testid="login-button" type="submit">
+        ZALOGUJ
+      </S.Button>
     </S.Container>
   );
 }
