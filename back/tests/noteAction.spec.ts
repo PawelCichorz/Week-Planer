@@ -21,6 +21,7 @@ describe('getAllNotes', () => {
 
         const resMock = {
             json: jest.fn(),
+            status: jest.fn().mockReturnThis(),
         } as unknown as Response;
 
         const noteModelMock = {
@@ -38,6 +39,7 @@ describe('getAllNotes', () => {
 
         // then
         expect(noteModelMock.find).toHaveBeenCalledWith({ userId: 'testUserId' });
+        expect(resMock.status).toHaveBeenCalledWith(200);
         expect(resMock.json).toHaveBeenCalledWith(mockNotes);
     });
 
@@ -49,6 +51,7 @@ describe('getAllNotes', () => {
 
         const resMock = {
             json: jest.fn(),
+            status: jest.fn().mockReturnThis(),
         } as unknown as Response;
 
         const noteModelMock = {
@@ -62,4 +65,54 @@ describe('getAllNotes', () => {
         expect(noteModelMock.find).toHaveBeenCalledWith({ userId: 'otherUserId' });
         expect(resMock.json).toHaveBeenCalledWith([]);
     });
+
+    it('should not return notes for different userId', async () => {
+        // given
+        const reqMock = {
+            user: { userId: 'otherUserId' },
+        } as NoteRequest;
+
+        const resMock = {
+            json: jest.fn(),
+            status: jest.fn().mockReturnThis(),
+        } as unknown as Response;
+
+        const noteModelMock = {
+            find: jest.fn().mockResolvedValue([]),
+        } as unknown as mongoose.Model<NoteM>;
+
+        // when
+        await noteActions(noteModelMock).getAllNotes(reqMock, resMock);
+
+        // then
+        expect(noteModelMock.find).toHaveBeenCalledWith({ userId: 'otherUserId' });
+        expect(resMock.status).toHaveBeenCalledWith(200);
+        expect(resMock.json).toHaveBeenCalledWith([]);
+    });
+
+    it('should handle errors thrown by noteModel.find()', async () => {
+        // given
+        const reqMock = {
+            user: { userId: 'testUserId' },
+        } as NoteRequest;
+
+        const resMock = {
+            json: jest.fn(),
+            status: jest.fn().mockReturnThis(),
+        } as unknown as Response;
+
+        const noteModelMock = {
+            find: jest.fn().mockRejectedValue(new Error('Database error')),
+        } as unknown as mongoose.Model<NoteM>;
+
+        // when
+        await noteActions(noteModelMock).getAllNotes(reqMock, resMock);
+
+        // then
+        expect(noteModelMock.find).toHaveBeenCalledWith({ userId: 'testUserId' });
+        expect(resMock.status).toHaveBeenCalledWith(500);
+        expect(resMock.json).toHaveBeenCalledWith({ error: 'An error occurred while fetching notes' });
+    });
+
+
 });

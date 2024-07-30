@@ -8,10 +8,11 @@ import EditingContext from "../context";
 type NotesProps = {
   day: string;
   modalOpen: boolean;
-  setModalOpen: (isOpen: boolean) => void; // Poprawiony typ setModalOpen
+  setModalOpen: (isOpen: boolean) => void;
+  dayTitle: string;
 };
 
-function NoteForm({ day, setModalOpen, modalOpen }: NotesProps) {
+function NoteForm({ day, setModalOpen, modalOpen, dayTitle }: NotesProps) {
   const { state, dispatch } = useContext(EditingContext);
 
   const titleInputRef = useRef<HTMLInputElement>(null);
@@ -93,6 +94,7 @@ function NoteForm({ day, setModalOpen, modalOpen }: NotesProps) {
                 payload: { title: e.target.value },
               })
             }
+            data-testid={dayTitle + "input"}
           />
           <S.Label>Opis:</S.Label>
           <S.Input
@@ -104,10 +106,11 @@ function NoteForm({ day, setModalOpen, modalOpen }: NotesProps) {
                 payload: { body: e.target.value },
               })
             }
+            data-testid={dayTitle + "body"}
           />
         </S.EditNoteDiv>
 
-        <S.Button onClick={() => saveNote()}>
+        <S.Button onClick={() => saveNote()} data-testid={dayTitle + "save"}>
           {state.isEditing ? "Zapisz" : "Dodaj"}
         </S.Button>
         <S.Button

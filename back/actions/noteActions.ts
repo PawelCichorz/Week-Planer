@@ -36,23 +36,23 @@ const noteActions = (noteModel: Model<any>) => ({
         });
 
         await newNote.save();
-        res.json(newNote);
+        res.status(201).json(newNote); 
     },
 
     async getAllNotes(req: NoteRequest, res: Response) {
-       
-   
-        const  userId = req.user!.userId;
-        
-       
-        const doc = await noteModel.find({ userId });
-        res.json(doc);
+        try {
+            const userId = req.user!.userId;
+            const doc = await noteModel.find({ userId });
+            res.status(200).json(doc);
+        } catch (error) {
+            res.status(500).json({ error: 'An error occurred while fetching notes' });
+        }
     },
 
     async getNote(req: NoteRequest, res: Response) {
         const { id } = req.params;
         const note = await noteModel.findOne({ _id: id });
-        res.json(note);
+        res.status(200).json(note)
     },
 
     async updateNote(req: NoteRequest, res: Response) {
@@ -65,7 +65,7 @@ const noteActions = (noteModel: Model<any>) => ({
         note.title = title;
         note.body = body;
         await note.save();
-        res.json(note);
+        res.status(200).json(note);
     },
 
     async deleteNote(req: NoteRequest, res: Response) {
@@ -74,7 +74,7 @@ const noteActions = (noteModel: Model<any>) => ({
         if (result.deletedCount === 0) {
             return res.status(404).json({ error: "Note not found" });
         }
-        res.send(`Note deleted: ${id}`);
+        res.status(200).send(`Note deleted: ${id}`)
     },
 
 })

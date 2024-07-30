@@ -1,6 +1,13 @@
+import {
+  login,
+  verifyNotesCount,
+  addNote,
+  editNote,
+  deleteNote,
+} from "./helperFunction";
+
 describe("Login and Notes functionality", () => {
-  it("should display error message on invalid login and redirect on valid login, then show 3 notes", () => {
-    // Intercept the login request
+  beforeEach(() => {
     cy.intercept("POST", "/logowanie", (req) => {
       const { email, password } = req.body;
       if (email === "Palacz@o2.pl" && password === "Palacz1") {
@@ -21,7 +28,6 @@ describe("Login and Notes functionality", () => {
       }
     }).as("loginRequest");
 
-    // Intercept the notes request and respond with 3 notes
     cy.intercept("GET", "/notes", {
       statusCode: 200,
       body: [
@@ -49,45 +55,73 @@ describe("Login and Notes functionality", () => {
       ],
     }).as("notesRequest");
 
-    cy.intercept("DELETE", "/notes/note1", {
+    cy.visit("http://localhost:3000/logowanie");
+
+    // Perform login
+    login("Pawel@o2.pl", "Pawel2");
+    cy.wait("@notesRequest");
+    cy.url().should("include", "/notes");
+  });
+
+  it("should display error message on invalid login and redirect on valid login, then show 3 notes", () => {
+    // Test part is handled in beforeEach
+    verifyNotesCount(3);
+  });
+
+  it("should add a new note", () => {
+    cy.intercept("POST", "/notes", {
+      statusCode: 201,
+      body: {
+        _id: "note4",
+        title: "New Note",
+        body: "Content of new note",
+        userId: "user1",
+        day: "m",
+      },
+    }).as("addNoteRequest");
+
+    // Add a new note
+    addNote("New Note", "Content of new note");
+
+    // Wait for the POST request to complete
+    cy.wait("@addNoteRequest");
+
+    // Verify the new note appears in the list
+    verifyNotesCount(4);
+    cy.contains("New Note").should("be.visible");
+  });
+
+  it("should edit an existing note", () => {
+    cy.intercept("PUT", "/notes/note2", {
+      statusCode: 200,
+      body: {
+        _id: "note2",
+        title: "Updated Note 2",
+        body: "Updated content of note 2",
+        userId: "user1",
+        day: "m",
+      },
+    }).as("editNoteRequest");
+
+    // Edit the second note
+    editNote(1, "Updated Note 2", "Updated content of note 2");
+
+    // Wait for the PUT request to complete
+    cy.wait("@editNoteRequest");
+    cy.contains("Updated Note 2").should("be.visible");
+  });
+
+  it("should delete a note", () => {
+    cy.intercept("DELETE", "/notes/note2", {
       statusCode: 200,
       body: {},
     }).as("deleteNoteRequest");
-    // Odwiedź stronę logowania
-    cy.visit("http://localhost:3000/logowanie");
+    deleteNote(1);
 
-    // Wprowadź błędne dane logowania
-    cy.get("input#email").type("Palacz@o2.pl");
-    cy.get("input#password").type("Palacz1");
-    cy.get('button[data-testid="login-button"]').click();
-
-    // Oczekuj komunikatu błędu
-    cy.contains("Nieprawidłowy email lub hasło").should("be.visible");
-
-    // Wprowadź poprawne dane logowania
-    cy.get("input#email").clear().type("Pawel@o2.pl");
-    cy.get("input#password").clear().type("Pawel2");
-    cy.get('button[data-testid="login-button"]').click();
-    cy.wait("@notesRequest");
-    // Oczekuj przekierowania do /notes
-    cy.url().should("include", "/notes");
-
-    // Poczekaj na załadowanie notatek
-
-    // Sprawdź, czy są trzy notatki na stronie
-    cy.get('[data-testid="note"]').should("have.length", 3);
-
-    // Kliknij przycisk "Usuń" dla pierwszej notatki
-    cy.get('[data-testid="note"]')
-      .first()
-      .within(() => {
-        cy.get('button[data-testid="delete-button"]').click();
-      });
-
-    // Poczekaj na wykonanie DELETE requestu
+    // Wait for the DELETE request to complete
     cy.wait("@deleteNoteRequest");
 
-    // Sprawdź, czy są dwie notatki na stronie
-    cy.get('[data-testid="note"]').should("have.length", 2);
+    // Verify the note has been removed from the list
+    verifyNotesCount(2);
   });
 });

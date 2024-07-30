@@ -56,7 +56,12 @@ function Notes({ day, dayTitle }: NotesProps) {
 
   return (
     <S.Container>
-      <NoteForm day={day} modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      <NoteForm
+        day={day}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        dayTitle={dayTitle}
+      />
       <NotesList
         day={day}
         dayTitle={dayTitle}

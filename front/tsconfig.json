@@ -13,7 +13,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["cypress"]
+    "types": ["jest", "@testing-library/jest-dom", "cypress"]
   },
   "include": ["src", "jest.config.ts", "cypress/**/*.ts"],
   "exclude": ["node_modules"]

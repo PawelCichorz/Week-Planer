@@ -14,6 +14,7 @@ const config: Config.InitialOptions = {
   },
   transformIgnorePatterns: ["node_modules/(?!(axios)/)"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  testPathIgnorePatterns: ["<rootDir>/cypress/"],
 };
 
 export default config;

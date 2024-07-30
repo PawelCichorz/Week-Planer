@@ -67,19 +67,24 @@ function NotesList({ dayTitle, day, setModalOpen }: NotesListProps) {
             <div>{notatka.body}</div>
           </S.TimeandDesc>
           <S.DivWithButton>
-            <S.ButtonEdit onClick={() => openModalToEdit(notatka)}>
+            <S.ButtonEdit
+              onClick={() => openModalToEdit(notatka)}
+              data-testid="edit-button"
+            >
               Edytuj
             </S.ButtonEdit>
             <S.ButtonDelete
               onClick={() => deleteNote(notatka._id)}
-              data-testid="delete-button"
+              data-testid={dayTitle + "delete"}
             >
               Usuń
             </S.ButtonDelete>
           </S.DivWithButton>
         </S.OneFetchNotes>
       ))}
-      <S.ButtonAddNote onClick={() => openModalToAdd()}>Dodaj</S.ButtonAddNote>
+      <S.ButtonAddNote onClick={() => openModalToAdd()} data-testid={dayTitle}>
+        Dodaj
+      </S.ButtonAddNote>
     </S.Container>
   );
 }
