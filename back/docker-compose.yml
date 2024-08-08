@@ -9,3 +9,21 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
+    volumes:
+      - mongo-data:/data/db
+
+  node-app:
+    container_name: my-node-app
+    build: .
+    ports:
+      - "3031:3031"
+    depends_on:
+      - my-mongo
+    environment:
+      MONGO_URI: mongodb://admin:admin@my-mongo:27017
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules  # Aby uniknąć nadpisywania node_modules
+
+volumes:
+  mongo-data:

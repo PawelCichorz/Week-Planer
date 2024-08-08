@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import User from '../models/user';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import nodemailer from 'nodemailer';
 import { URLSearchParams } from 'url';
 
