@@ -11,6 +11,7 @@ The whole backend is based on well-configured RestApi.The project also includes 
 -JWT
 ## How to run App 
 git clone https://github.com/PawelCichorz/Week-Planer.git
+
 cd Week-Planer
 
 cd frontend
@@ -25,6 +26,7 @@ MONGO_URI=your_mongodb_uri  # Replace with your MongoDB connection URI
 JWT_SECRET=your_jwt_secret  # Replace with a secure JWT secret
 
 npm start
+
 npm run dev
 
 ## Funcionality
