@@ -1,0 +1,78 @@
+// {
+//   "env": {
+//     "browser": true,
+//     "es2021": true,
+//     "cypress/globals": true,
+//     "node": true
+//   },
+//   "extends": [
+//     "eslint:recommended",
+//     "plugin:react/recommended",
+//     "plugin:prettier/recommended",
+//     "plugin:@typescript-eslint/recommended"
+//   ],
+//   "parser": "@typescript-eslint/parser",
+//   "parserOptions": {
+//     "ecmaFeatures": {
+//       "jsx": true
+//     },
+//     "ecmaVersion": 2023,
+//     "sourceType": "module"
+//   },
+//   "plugins": ["react", "cypress", "prettier"],
+//   "rules": {
+//     "react/prop-types": "off",
+//     "@typescript-eslint/no-explicit-any": "off"
+//   }
+// }
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "cypress/globals": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2023,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "cypress", "prettier", "import"],
+  "rules": {
+    "react/prop-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin", // np. fs, path
+          "external", // np. react, lodash
+          "internal", // np. nasze aliasy dla src/
+          ["parent", "sibling", "index"] // importy relatywne
+        ],
+        "pathGroups": [
+          {
+            "pattern": "src/**",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin", "external"],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always"
+      }
+    ]
+  }
+}

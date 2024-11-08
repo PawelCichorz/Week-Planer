@@ -31,75 +31,80 @@ const router = express_1.default.Router();
 const noteActions_1 = __importDefault(require("../actions/noteActions"));
 const userController = __importStar(require("../actions/user-controler"));
 router.get('/', function hello(req, res) {
-    res.send("siema");
+    res.send("siema Paweł");
 });
-// Poniedziałek
-// Pobieranie notatek
-router.get('/notesm', noteActions_1.default.getAllnotesM);
-// Pobieranie konkretnej notatki
-router.get('/notesm/:id', noteActions_1.default.getNoteM);
-// Zapisywanie
-router.post('/notesm', noteActions_1.default.saveNoteM);
-// Edytowanie
-router.put('/notesm/:id', noteActions_1.default.updateNoteM);
-// Usuwanie
-router.delete('/notesm/:id', noteActions_1.default.deleteNoteM);
-// Wtorek
-// Pobieranie notatek
-router.get('/notest', noteActions_1.default.getAllnotesT);
-// Pobieranie konkretnej notatki
-router.get('/notest/:id', noteActions_1.default.getNoteT);
-// Zapisywanie
-router.post('/notest', noteActions_1.default.saveNoteT);
-// Edytowanie
-router.put('/notest/:id', noteActions_1.default.updateNoteT);
-// Usuwanie
-router.delete('/notest/:id', noteActions_1.default.deleteNoteT);
-// Środa
-// Pobieranie notatek
-router.get('/notesw', noteActions_1.default.getAllnotesW);
-// Pobieranie konkretnej notatki
-router.get('/notesw/:id', noteActions_1.default.getNoteW);
-// Zapisywanie
-router.post('/notesw', noteActions_1.default.saveNoteW);
-// Edytowanie
-router.put('/notesw/:id', noteActions_1.default.updateNoteW);
-// Usuwanie
-router.delete('/notesw/:id', noteActions_1.default.deleteNoteW);
-// Czwartek
-// Pobieranie notatek
-router.get('/notesth', noteActions_1.default.getAllnotesTh);
-// Pobieranie konkretnej notatki
-router.get('/notesth/:id', noteActions_1.default.getNoteTh);
-// Zapisywanie
-router.post('/notesth', noteActions_1.default.saveNoteTh);
-// Edytowanie
-router.put('/notesth/:id', noteActions_1.default.updateNoteTh);
-// Usuwanie
-router.delete('/notesth/:id', noteActions_1.default.deleteNoteTh);
-// Piątek
-// Pobieranie notatek
-router.get('/notesf', noteActions_1.default.getAllnotesF);
-// Pobieranie konkretnej notatki
-router.get('/notesf/:id', noteActions_1.default.getNoteF);
-// Zapisywanie
-router.post('/notesf', noteActions_1.default.saveNoteF);
-// Edytowanie
-router.put('/notesf/:id', noteActions_1.default.updateNoteF);
-// Usuwanie
-router.delete('/notesf/:id', noteActions_1.default.deleteNoteF);
-// Sobota
-router.get('/notess', noteActions_1.default.getAllnotesS);
-router.get('/notess/:id', noteActions_1.default.getNoteS);
-router.post('/notess', noteActions_1.default.saveNoteS);
-router.put('/notess/:id', noteActions_1.default.updateNoteS);
-router.delete('/notess/:id', noteActions_1.default.deleteNoteS);
-// Niedziela
-router.get('/notessu', noteActions_1.default.getAllnotesSu);
-router.get('/notessu/:id', noteActions_1.default.getNoteSu);
-router.post('/notessu', noteActions_1.default.saveNoteSu);
-router.put('/notessu/:id', noteActions_1.default.updateNoteSu);
-router.delete('/notessu/:id', noteActions_1.default.deleteNoteSu);
+router.get('/notes', noteActions_1.default.getAllNotes);
+router.get('/notes/:id', noteActions_1.default.getNote);
+router.post('/notes', noteActions_1.default.saveNote);
+router.put('/notes/:id', noteActions_1.default.updateNote);
+router.delete('/notes/:id', noteActions_1.default.deleteNote);
+// // Poniedziałek
+// // Pobieranie notatek
+// router.get('/notesm', noteActions.getAllnotesM);
+// // Pobieranie konkretnej notatki
+// router.get('/notesm/:id', noteActions.getNoteM);
+// // Zapisywanie
+// router.post('/notesm', noteActions.saveNoteM);
+// // Edytowanie
+// router.put('/notesm/:id', noteActions.updateNoteM);
+// // Usuwanie
+// router.delete('/notesm/:id', noteActions.deleteNoteM);
+// // Wtorek
+// // Pobieranie notatek
+// router.get('/notest', noteActions.getAllnotesT);
+// // Pobieranie konkretnej notatki
+// router.get('/notest/:id', noteActions.getNoteT);
+// // Zapisywanie
+// router.post('/notest', noteActions.saveNoteT);
+// // Edytowanie
+// router.put('/notest/:id', noteActions.updateNoteT);
+// // Usuwanie
+// router.delete('/notest/:id', noteActions.deleteNoteT);
+// // Środa
+// // Pobieranie notatek
+// router.get('/notesw', noteActions.getAllnotesW);
+// // Pobieranie konkretnej notatki
+// router.get('/notesw/:id', noteActions.getNoteW);
+// // Zapisywanie
+// router.post('/notesw', noteActions.saveNoteW);
+// // Edytowanie
+// router.put('/notesw/:id', noteActions.updateNoteW);
+// // Usuwanie
+// router.delete('/notesw/:id', noteActions.deleteNoteW);
+// // Czwartek
+// // Pobieranie notatek
+// router.get('/notesth', noteActions.getAllnotesTh);
+// // Pobieranie konkretnej notatki
+// router.get('/notesth/:id', noteActions.getNoteTh);
+// // Zapisywanie
+// router.post('/notesth', noteActions.saveNoteTh);
+// // Edytowanie
+// router.put('/notesth/:id', noteActions.updateNoteTh);
+// // Usuwanie
+// router.delete('/notesth/:id', noteActions.deleteNoteTh);
+// // Piątek
+// // Pobieranie notatek
+// router.get('/notesf', noteActions.getAllnotesF);
+// // Pobieranie konkretnej notatki
+// router.get('/notesf/:id', noteActions.getNoteF);
+// // Zapisywanie
+// router.post('/notesf', noteActions.saveNoteF);
+// // Edytowanie
+// router.put('/notesf/:id', noteActions.updateNoteF);
+// // Usuwanie
+// router.delete('/notesf/:id', noteActions.deleteNoteF);
+// // Sobota
+// router.get('/notess', noteActions.getAllnotesS);
+// router.get('/notess/:id', noteActions.getNoteS);
+// router.post('/notess', noteActions.saveNoteS);
+// router.put('/notess/:id', noteActions.updateNoteS);
+// router.delete('/notess/:id', noteActions.deleteNoteS);
+// // Niedziela
+// router.get('/notessu', noteActions.getAllnotesSu);
+// router.get('/notessu/:id', noteActions.getNoteSu);
+// router.post('/notessu', noteActions.saveNoteSu);
+// router.put('/notessu/:id', noteActions.updateNoteSu);
+// router.delete('/notessu/:id', noteActions.deleteNoteSu);
 // Rejestracja
 router.post('/zarejestruj', userController.register);
 // Logowanie

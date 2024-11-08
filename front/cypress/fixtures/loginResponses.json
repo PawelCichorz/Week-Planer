@@ -1,0 +1,9 @@
+{
+  "invalidLogin": {
+    "message": "Nieprawidłowy email lub hasło"
+  },
+  "validLogin": {
+    "accessToken": "fakeAccessToken",
+    "refreshToken": "fakeRefreshToken"
+  }
+}
